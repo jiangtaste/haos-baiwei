@@ -13,13 +13,13 @@ blueprint:
           model: SC341
     button_one_short_press:
       name: Single Press
-      description: Action to run on button 1 (lower-left) single press
+      description: Action to run on button 1 (upper-left) single press
       default: []
-      selector:.
+      selector:
         action: {}
     button_two_short_press:
       name: Single Press
-      description: Action to run on button 2 (lower-right) single press
+      description: Action to run on button 2 (lower-left) single press
       default: []
       selector:
         action: {}
@@ -31,7 +31,7 @@ blueprint:
         action: {}
     button_four_short_press:
       name: Single Press
-      description: Action to run on button 4 (upper-left) single press
+      description: Action to run on button 4 (lower-right) single press
       default: []
       selector:
         action: {}
