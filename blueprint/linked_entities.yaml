@@ -1,0 +1,36 @@
+blueprint:
+  name: Linked Entities
+  description: This blueprint allows you to easily create/maintain an automation that links the state of multiple entities
+  domain: automation
+  input:
+    linked_entity:
+      name: Linked Entities
+      description: Entities whose state will be linked (if any of them transitions to ON state, all will be ON. Same for the OFF state).
+      selector:
+        entity:
+          multiple: true
+
+mode: single
+max_exceeded: silent
+
+variables:
+  linked_entities: !input linked_entity
+
+trigger:
+  - platform: state
+    id: turn_on
+    entity_id: !input linked_entity
+    from: "off"
+    to: "on"
+  - platform: state
+    id: turn_off
+    entity_id: !input linked_entity
+    from: "on"
+    to: "off"
+
+action:
+  - service: "homeassistant.turn_{{ iif(trigger.id == 'turn_on', 'on', 'off') }}"
+    target:
+      entity_id: !input linked_entity
+  - delay:
+      milliseconds: 1
